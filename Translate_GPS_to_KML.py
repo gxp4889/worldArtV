@@ -1,3 +1,4 @@
+import math
 
 inputFile = "testData.txt"
 outputFile = "locations.kml"
@@ -9,22 +10,22 @@ latitudeInMeters = 111000
 # May turn out redundant, I dunno
 class LocationData:
 	# Basic Constructor
-	def __init__(self, lng, lat, speed, angle, time):
-		self.lng = lng
+	def __init__(self, lon, lat, speed, angle, time):
+		self.lon = lon
 		self.lat = lat
 		self.speed = speed
 		self.angle = angle
 		self.time = time
 
 	def __str__(self):
-		return (f"Longitude: {self.lng}" +
+		return (f"Longitude: {self.lon}" +
 				f" Latitude: {self.lat}" + 
 				f" Speed: {self.speed}" + 
 				f" Angle: {self.angle}" + 
 				f" Time: {self.time}" )
 
 	def outputKMLCoordinates(self):
-		return f"{self.lng},{self.lat},{self.speed}"
+		return f"{self.lon},{self.lat},{self.speed}"
 
 #$GPRMC,193049.800,A,4305.1558,N,07740.7774,W,0.16,200.90,130818,,,A*71 
 #lng=-77.679618, lat=43.085929, altitude=199.20, speed=0.22, satellites=5, angle=179.4800, fixquality=1
@@ -53,14 +54,14 @@ def translateGPRMC(gpsString):
 		longitudeDegrees *= -1 if gpsTokens[6] == "W" else 1
 
 		# Get speed, which is initially in Knots
-		# I will convert to MPH, not sure what to do
-		oneKnotInMPH = 1.15078
-		speed = float(gpsTokens[7])*oneKnotInMPH
+		# I will convert to KmPH, not sure what to do
+		oneKnotInKPH = 1.852
+		speed = float(gpsTokens[7])*oneKnotInKPH
 
 		# Get Angle of vehicle
 		angle = float(gpsTokens[8])
 	
-		return LocationData(latitudeDegrees, longitudeDegrees, speed, angle, time)
+		return LocationData( longitudeDegrees, latitudeDegrees, speed, angle, time)
 
 # Translates a GPS string (NOT RMC OR GGA) and returns an instance of a new class
 def translateGPSString(gpsString):
@@ -116,6 +117,25 @@ def writeKMLTrailer(fp):
 	kmlTrailer += '</kml>\n'
 	fp.write(kmlTrailer)
 
+# Find the euclidian distance between two points 
+# RETURNS DISTANCE METERS!
+def distanceFromCoords(locData1, locData2):
+	# One degree of latitude is 111111 meters everywhere on the globe
+	latDegreeInMeters = 111111
+	latDist = (locData1.lat - locData2.lat)*latDegreeInMeters
+
+	# One degree of longitude is dependent on your latitude
+	lonDist = (locData1.lon - locData2.lon)*math.cos(math.radians(locData2.lat))*latDegreeInMeters
+
+	# One degree of longitude is different depending on where you're on the globe		
+	return math.sqrt( lonDist**2 + latDist**2 )
+
+# -77.67530935350142,43.09912741431598,161.9482426272082 -77.66910010272682,43.09402034739996,159.2874976941509 
+locData1 = LocationData( -77.67530935350142, 43.09912741431598, 0, 0, 0)
+locData2 = LocationData( -77.66910010272682, 43.09402034739996, 0, 0, 0)
+
+print(distanceFromCoords(locData2, locData1))
+input("")
 # Write out all the coordinates for the KML file
 # Locations is a list of LocationUpdate objects
 # FP is a file pointer
@@ -143,12 +163,12 @@ def processFile(gpsFilename):
 			if locationUpdate:
 				if len(locationUpdates) > 0:
 					lastLocation = locationUpdates[len(locationUpdates)-1]
-					if lastLocation.lng == locationUpdate.lng and lastLocation.lat == locationUpdate.lat:
-						print("---------------------")
-						print(locationUpdate)
-						print(lastLocation)
-						print(locationUpdate.speed)
-						print("---------------------")
+					if lastLocation.lon == locationUpdate.lon and lastLocation.lat == locationUpdate.lat:
+						#print("---------------------")
+						#print(locationUpdate)
+						#print(lastLocation)
+						#print(locationUpdate.speed)
+						#print("---------------------")
 						continue
 					else:
 						locationUpdates.append(locationUpdate)
