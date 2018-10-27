@@ -82,6 +82,46 @@
 		<Placemark>
 			<name>Start Left Turn</name>
 			<LookAt>
+						<longitude>-77.679095</longitude>
+				<latitude>43.087385</latitude>
+
+			<altitude>0</altitude>
+			<heading>0.5193636279686823</heading>
+			<tilt>0</tilt>
+			<range>245269.2210882676</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-77.679095,43.087385,33.2434</coordinates>
+
+		</Point>
+	</Placemark>
+	
+		<Placemark>
+			<name>Start Left Turn</name>
+			<LookAt>
+						<longitude>-77.67897166666667</longitude>
+				<latitude>43.08765</latitude>
+
+			<altitude>0</altitude>
+			<heading>0.5193636279686823</heading>
+			<tilt>0</tilt>
+			<range>245269.2210882676</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-77.67897166666667,43.08765,23.724120000000003</coordinates>
+
+		</Point>
+	</Placemark>
+	
+		<Placemark>
+			<name>Start Left Turn</name>
+			<LookAt>
 						<longitude>-77.67674333333333</longitude>
 				<latitude>43.08847</latitude>
 
@@ -155,6 +195,46 @@
 		<Point>
 			<gx:drawOrder>1</gx:drawOrder>
 			<coordinates>-77.679215,43.088005,29.131960000000003</coordinates>
+
+		</Point>
+	</Placemark>
+	
+		<Placemark>
+			<name>Start Left Turn</name>
+			<LookAt>
+						<longitude>-77.68515166666667</longitude>
+				<latitude>43.082413333333335</latitude>
+
+			<altitude>0</altitude>
+			<heading>0.5193636279686823</heading>
+			<tilt>0</tilt>
+			<range>245269.2210882676</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-77.68515166666667,43.082413333333335,32.2248</coordinates>
+
+		</Point>
+	</Placemark>
+	
+		<Placemark>
+			<name>Start Left Turn</name>
+			<LookAt>
+						<longitude>-77.68486</longitude>
+				<latitude>43.08223</latitude>
+
+			<altitude>0</altitude>
+			<heading>0.5193636279686823</heading>
+			<tilt>0</tilt>
+			<range>245269.2210882676</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>-77.68486,43.08223,24.927920000000004</coordinates>
 
 		</Point>
 	</Placemark>

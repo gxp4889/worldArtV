@@ -43,7 +43,7 @@ def findLeftTurns(locationDataPoints):
 		while j < len(locationDataPoints):
 			tempLoc = locationDataPoints[j]
 			if addDistance(currLoc, tempLoc) >= 30:
-				if findAngleDifference(currLoc, tempLoc) >= 75:
+				if findAngleDifference(currLoc, tempLoc) >= 60:
 					turnPairs.append([currLoc, tempLoc])
 				i=j
 				break
