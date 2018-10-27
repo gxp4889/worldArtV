@@ -73,6 +73,32 @@ def writeKMLTurnPairHeader(fp):
 	</Style>
 	""")
 
+def writeKMLPlaceMark(locationDataObj, fp):
+	fp.write("""
+		<Placemark>
+			<name>Start Left Turn</name>
+			<LookAt>
+		""")
+	fp.write(f"\t\t\t\t<longitude>{locationDataObj.lon}</longitude>\n")
+	fp.write(f"\t\t\t\t<latitude>{locationDataObj.lat}</latitude>\n")
+	fp.write(
+	"""
+			<altitude>0</altitude>
+			<heading>0.5193636279686823</heading>
+			<tilt>0</tilt>
+			<range>245269.2210882676</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+	""")
+	fp.write(f"\t\t<coordinates>{locationDataObj.outputKMLCoordinates()}</coordinates>\n")
+	fp.write("""
+		</Point>
+	</Placemark>
+	""")
+
 def writeKMLTurnPairCoords(turnPairs, fp):
 	fp.write(
 		"""
@@ -88,53 +114,8 @@ def writeKMLTurnPairCoords(turnPairs, fp):
 		</StyleMap>
 		""")
 	for turnPair in turnPairs:
-		fp.write("""
-		<Placemark>
-			<name>Start Left Turn</name>
-			<LookAt>
-		""")
-		fp.write(f"\t\t\t\t<longitude>{turnPair[0].lon}</longitude>\n")
-		fp.write(f"\t\t\t\t<latitude>{turnPair[0].lat}</latitude>\n")
-		fp.write(
-		"""
-				<altitude>0</altitude>
-				<heading>0.5193636279686823</heading>
-				<tilt>0</tilt>
-				<range>245269.2210882676</range>
-				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-			</LookAt>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<Point>
-				<gx:drawOrder>1</gx:drawOrder>
-		""")
-		fp.write(f"\t\t<coordinates>{turnPair[0].outputKMLCoordinates()}</coordinates>\n")
-		fp.write("""
-			</Point>
-		</Placemark>
-		<Placemark>
-			<name>End Left Turn</name>
-			<LookAt>
-			""")
-		fp.write(f"\t\t\t\t<longitude>{turnPair[1].lon}</longitude>\n")
-		fp.write(f"\t\t\t\t<latitude>{turnPair[1].lat}</latitude>\n")
-		fp.write(
-		"""
-				<altitude>0</altitude>
-				<heading>0.5193636279686823</heading>
-				<tilt>0</tilt>
-				<range>245269.2210882676</range>
-				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-			</LookAt>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<Point>
-				<gx:drawOrder>1</gx:drawOrder>
-		""")
-		fp.write(f"\t\t<coordinates>{turnPair[1].outputKMLCoordinates()}</coordinates>\n")
-		fp.write(
-		"""
-			</Point>
-		</Placemark>
-		""")
+		writeKMLPlaceMark(turnPair[0], fp)
+		writeKMLPlaceMark(turnPair[1], fp)
 
 def writeKMLTurnPairTrailer(fp):
 	fp.write("""
