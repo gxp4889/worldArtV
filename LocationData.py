@@ -26,6 +26,15 @@ class LocationData:
 				f" Angle: {self.angle}" + 
 				f" Time: {self.time}" )
 
+	def toDict(self):
+		return {
+			'lon': self.lon,
+			'lat': self.lat,
+			'speed': self.speed,
+			'angle': self.angle,
+			'time': self.time
+		}
+
 	def outputKMLCoordinates(self):
 		return f"{self.lon},{self.lat},{self.speed}"
 

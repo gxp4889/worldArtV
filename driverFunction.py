@@ -1,10 +1,12 @@
 from LocationData import LocationData
 import DetectLeftTurns
 import KML
+import pandas as pd
 
 inputFile = "testData.txt"
 outputPathFile = "locations.kml"
 outputPointsFile = "turnPoints.kml"
+dataOutputFile = "dataframe.csv"
 
 def processFile(gpsFilename):
 	locationUpdates = []
@@ -25,11 +27,13 @@ def processFile(gpsFilename):
 					locationUpdates.append(locationUpdate)
 			else:
 				continue
-				
+
 	return locationUpdates
 
 
 locationUpdates = processFile(inputFile)
+data = pd.DataFrame.from_records([loc.toDict() for loc in locationUpdates])
+data.to_csv(dataOutputFile, index_label='index')
 turnPairs = DetectLeftTurns.findLeftTurns(locationUpdates)
 print("LEFT TURNS:")
 for turnPair in turnPairs:
